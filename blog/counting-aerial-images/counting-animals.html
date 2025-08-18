@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When AI Meets the Wild: Counting Elephants and Sea Lions</title>
+<meta name="description" content="A narrative account of counting elephants and Steller sea lions from the sky using deep learning with density maps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #0e1726;
+    --muted: #5a6a85;
+    --line: #e6ecf5;
+    --card: #f9fbff;
+    --accent: #0a84ff;
+    --accent-soft: #e9f3ff;
+    --radius: 14px;
+    --shadow: 0 10px 30px rgba(14,23,38,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .shell { max-width: 980px; margin: 0 auto; padding: 24px; }
+  header.hero {
+    padding: 64px 24px 28px;
+  }
+  header.hero h1 {
+    font-family: Literata, Georgia, "Times New Roman", serif;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+    font-size: clamp(32px, 5vw, 56px);
+    letter-spacing: .2px;
+  }
+  header.hero p.tag {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 760px;
+  }
+  .meta {
+    margin-top: 18px;
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .chip {
+    background: var(--accent-soft);
+    color: var(--ink);
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #d7e7ff;
+    font-weight: 600;
+    font-size: .95rem;
+  }
+  .hr { height:1px; background: var(--line); margin: 28px 0; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 22px;
+    margin: 18px 0 24px;
+  }
+  .lead { font-size: 1.12rem; }
+  h2 {
+    font-family: Literata, Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    letter-spacing: .2px;
+  }
+  p {
+    margin: 0 0 14px 0;
+  }
+  figure {
+    margin: 0;
+  }
+  figure img {
+    width: 100%; height: auto;
+    border-radius: calc(var(--radius) - 4px);
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 18px rgba(14,23,38,.05);
+  }
+  figcaption {
+    color: var(--muted);
+    font-size: .95rem;
+    padding-top: 8px;
+  }
+  .split {
+    display: grid; gap: 18px; align-items: start;
+  }
+  @media (min-width: 880px) {
+    .split { grid-template-columns: 1.05fr .95fr; }
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  blockquote {
+    margin: 0;
+    padding: 12px 16px;
+    border-left: 4px solid var(--accent);
+    background: #f5f9ff;
+    color: #1b2a44;
+    border-radius: 8px;
+  }
+  footer {
+    color: var(--muted); text-align:center; padding: 28px 0 40px;
+  }
+  .date {
+  margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+<header class="hero shell">
+  <h1>When AI Meets the Wild: Counting Elephants and Sea Lions</h1>
+  <p class="tag">A personal blog on how aerial photographs and deep learning helped us count elephants on land and Steller sea lions along the shore.</p>
+  <div class="meta">
+    <span class="chip">Elephants</span>
+    <span class="chip">Steller sea lions</span>
+    <span class="chip">Remote sensing</span>
+    <span class="chip">Density maps</span>
+  </div>
+  <div class="date">
+    <span class="chip" style="background:#f0f4f9; color:#555;">Published: Mar 01, 2023</span>
+  </div>
+</header>
+
+  <main class="shell">
+    <section class="card lead">
+      <p>We began with a simple question that turned out to be anything but: how many giants share this planet with us, and how are they doing? On some days the work felt like a safari; on others, like a puzzle laid out on a light table. From a small aircraft over Africa and a wind‑worn coast in Alaska, our cameras clicked. Later, in a quiet room, the images became data, and the data became a story.</p>
+    </section>
+
+    <section class="card split">
+      <div>
+        <h2>Why Count</h2>
+        <p>Numbers are the language conservation speaks. Elephant counts chart the pressure of poaching and the pace of habitat change. Sea lion counts tell us whether the ocean’s pantry is stocked. Without credible numbers, we are steering without a compass.</p>
+        <p>Traditional surveys are heroic but unforgiving: bumpy flights, thin margins for error, and colonies that look like a tangle of driftwood and sun‑warmed rocks. We needed a steadier way to listen to what the images were already trying to say.</p>
+      </div>
+      <figure>
+        <img src="./images/img1.webp" alt="Input and output examples showing density maps and predicted counts for wildlife.">
+        <figcaption>From photograph to probability: brighter patches in the density map suggest likely animal locations; integrating those values yields a count.</figcaption>
+      </figure>
+    </section>
+
+    <section class="card">
+      <h2>The Trick</h2>
+      <p>We taught a computer to paint what we call a <strong>density map</strong>. Each animal marked by a human expert becomes a soft spotlight on the image; the model learns to recreate those spotlights from raw pixels. Add up the light, and you have the number.</p>
+      <p>For elephants, our training images came from South Africa, Botswana, and Namibia. For Steller sea lions, we learned from carefully annotated rookeries provided by NOAA’s Alaska Fisheries Science Center. A U‑Net‑style network did the heavy lifting; patience and good labels did the rest.</p>
+    </section>
+
+    <section class="card split">
+      <figure>
+        <img src="./images/imag2.webp" alt="Diagram of the U-Net pipeline producing density maps and counts.">
+        <figcaption>The pipeline in a sentence: Image → Network → Density map → Integrate → Count.</figcaption>
+      </figure>
+      <div>
+        <h2>What We Found</h2>
+        <p>On elephants, the model’s error hovered around an RMSE of 0.60 — close enough to feel like we were standing right there. On Steller sea lions, where overlap and spray complicate everything, we reached an RMSE of 1.88. The remarkable part wasn’t a single number; it was the rhythm. Once trained, the model reads thousands of images with the same calm attention, frame after frame.</p>
+        <blockquote>Measure carefully, then act with confidence. Better counts lead to better decisions.</blockquote>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Epilogue — Why It Matters</h2>
+      <p>Good numbers don’t end debates, but they sharpen them. They set patrols in motion, redraw lines on maps, and nudge budgets toward what works. And the recipe we used — aerial images plus density maps — travels well. Swap elephants for penguins or sea lions for whales, and the method still holds.</p>
+    </section>
+
+    <section class="card">
+      <h2>Paper and Credits</h2>
+      <p><strong>Chirag Padubidri, Andreas Kamilaris, Savvas Karatsiolis, Jacob Hamminga</strong><br>
+      “Counting Sea Lions and Elephants from Aerial Photography using Deep Learning with Density Maps,” <em>Animal Biotelemetry</em>, 9(27), August 2021. DOI: <a href="https://doi.org/10.1186/s40317-021-00247-x">10.1186/s40317-021-00247-x</a></p>
+      <p style="color: var(--muted);">Elephant imagery: South Africa, Botswana, Namibia. Sea lion imagery: NOAA Fisheries Alaska Fisheries Science Center.</p>
+    </section>
+
+    <footer>
+      © 2021–2025 — A light note on serious work. Built for reading and sharing.
+    </footer>
+  </main>
+</body>
+</html>
