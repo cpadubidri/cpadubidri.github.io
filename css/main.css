@@ -1040,6 +1040,14 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	line-height: 1.25;
 	margin-bottom: 1.2rem;
 }
+.section-intro h4 {
+	color: #FF0077;
+	font-size: 1.6rem;
+	line-height: 1.875;
+	margin-bottom: 0.3rem;
+	letter-spacing: .4rem;
+}
+
 .section-intro h5 {
 	color: #FF0077;
 	font-size: 1.6rem;
@@ -1064,6 +1072,10 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 @media only screen and (max-width:600px) {
 	.section-intro h1 {
 		font-size: 2.6rem;
+	}
+	.section-intro h4 {
+		font-size: 1.5rem;
+		letter-spacing: .3rem;
 	}
 	.section-intro h5 {
 		font-size: 1.5rem;
@@ -1338,6 +1350,16 @@ header .logo a {
 	margin-right: auto;
 	text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
+.intro-content h4 {
+	color: #ffffff;
+	font-family: "poppins-bold", sans-serif;
+	font-size: 4.5rem;
+	line-height: 1.565;
+	margin-bottom: 0;
+	text-transform: uppercase;
+	letter-spacing: .3rem;
+	text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
 .intro-content h5 {
 	color: #cc005f;
 	font-family: "poppins-bold", sans-serif;
@@ -1464,6 +1486,11 @@ header .logo a {
 	.intro-content h1 {
 		font-size: 4.6rem;
 		margin-bottom: .6rem;
+	}
+	.intro-content h4 {
+		font-size: 1.5rem;
+		margin-bottom: .3rem;
+		letter-spacing: .2rem;
 	}
 	.intro-content h5 {
 		font-size: 1.5rem;
@@ -2124,6 +2151,9 @@ header .logo a {
 	color: white;
 }
 #services .section-intro h5 {
+	color: #e77fb0;
+}
+#services .section-intro h5 {
 	color: #FF0077;
 }
 #services .section-intro p {
@@ -2258,6 +2288,9 @@ header .logo a {
 }
 #contact .section-intro h1 {
 	color: white;
+}
+#contact .section-intro h5 {
+	color: #e77fb0;
 }
 #contact .section-intro h5 {
 	color: #FF0077;
@@ -2426,6 +2459,10 @@ header .logo a {
 	font-size: 4.2rem;
 	color: #FFFFFF;
 }
+.contact-info h4 {
+	color: #FF0077;
+}
+
 .contact-info h5 {
 	color: #FF0077;
 }
