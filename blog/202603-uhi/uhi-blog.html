@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journey: Cooling Urban Heat Islands with AI</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #131011;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.75em;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        p {
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .author-info {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .divider {
+            border: 1px solid #e0e0e0;
+            margin: 40px 0;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>My Journey: Cooling Urban Heat Islands with AI</h1>
+
+    <div class="image-container">
+        <img src="/blog/uhi/images/uhi-cover.jpg" alt="Urban Heat Island Illustration">
+    </div>
+
+    <p>Hello all,</p>
+
+    <p>This hackathon didn’t end with a top 20 finish for me, but it turned out to be one of the most rewarding learning experiences I’ve had in a while. Here’s how I approached the challenge and what I learned along the way.</p>
+
+    <p>When I first saw the problem—predicting Urban Heat Island (UHI) intensity—I didn’t treat it as just a machine learning task. I saw it as a geospatial problem. UHI isn’t isolated; it’s influenced by surroundings like buildings, vegetation, elevation, and materials.</p>
+
+    <h2>The Data I Used</h2>
+    <ul>
+        <li>DEM (~5m) and DSM (~20cm)</li>
+        <li>Landcover and NDVI (Sentinel-derived)</li>
+        <li>Building shadow data</li>
+        <li>Weather time-series data</li>
+    </ul>
+
+    <p>For each location, I cropped a ~100×100 grid from all raster layers. Overlap between points was intentional to preserve spatial continuity.</p>
+
+    <h2>Experiment 1: CNN + LSTM Hybrid</h2>
+
+    <p>I approached this as a multi-modal learning problem. Instead of merging everything, I grouped inputs based on resolution:</p>
+
+    <ul>
+        <li>High-resolution: Landcover, DSM</li>
+        <li>Lower-resolution: DEM, NDVI</li>
+    </ul>
+
+    <p>Each group passed through its own CNN (ResNet50). Weather time-series data was handled using an LSTM. The outputs were concatenated and passed through fully connected layers.</p>
+
+    <p><strong>Result:</strong> ~84% accuracy — decent, but clearly improvable.</p>
+
+    <h2>Experiment 2: Building Spatial Awareness with GNNs</h2>
+
+    <p>Since UHI is inherently spatial, I moved to a graph-based approach. The idea was to generate embeddings for each point and connect them in a graph.</p>
+
+    <p>This time, I added building shadow data and redesigned the encoder:</p>
+
+    <ul>
+        <li>Branch 1: DSM + DEM + Shadow (3-channel)</li>
+        <li>Branch 2: Landcover + NDVI (2-channel)</li>
+        <li>Used attention-based fusion instead of simple concatenation</li>
+    </ul>
+
+    <p>The CNN generated embeddings, and I removed the final layer to use it purely as a feature extractor (128-dimensional vectors).</p>
+
+    <p>I then built a graph using K-Nearest Neighbors (k=4) based on spatial location. Prediction points were masked during training, and I tested both:</p>
+
+    <ul>
+        <li>Vanilla GNN</li>
+        <li>Graph Attention Network (GAT)</li>
+    </ul>
+
+    <p><strong>Result:</strong> ~94% accuracy.</p>
+
+    <h2>Why This Approach Matters</h2>
+
+    <p>UHI isn’t just about a single point—it’s about relationships between locations.</p>
+
+    <p>GNNs naturally capture this by learning:</p>
+
+    <ul>
+        <li>What exists at a location</li>
+        <li>How it is influenced by nearby areas</li>
+    </ul>
+
+    <p>This makes them particularly powerful for urban climate problems.</p>
+
+    <p>Also, since the embedding stage is modular, this approach can scale to other cities with similar datasets.</p>
+
+    <h2>What I Wish I Had Time For</h2>
+
+    <ul>
+        <li>Feature importance analysis before GNN input</li>
+        <li>Faster training (GNNs are computationally expensive)</li>
+    </ul>
+
+    <p>If I could redo this, I’d definitely collaborate. Doing everything solo—from data prep to modeling—was challenging. A team would have made this smoother (and more fun).</p>
+
+    <h2>Final Thoughts</h2>
+
+    <p>This journey reinforced one key idea: geospatial problems need spatial thinking. Combining deep learning with graph structures opens powerful directions for urban climate modeling.</p>
+
+    <p>If you're working on geospatial AI, climate resilience, or GNNs, I’d love to connect.</p>
+
+    <h2>Project Code</h2>
+    <p>
+        The code for this project is available on GitHub:
+        <a href="https://github.com/cpadubidri/EY-UHI-Hackthon-Code" target="_blank">
+            EY-UHI-Hackthon-Code
+        </a>
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="author-info">
+        <strong>Author:</strong> Chirag Padubidri<br>
+        <strong>Project:</strong> EY Open Science AI &amp; Data Challenge – Cooling Urban Heat Islands
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 Chirag Padubidri. All rights reserved.
+</footer>
+
+</body>
+</html>

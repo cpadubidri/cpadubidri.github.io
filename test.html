@@ -1,0 +1,94 @@
+<section id="intro" class="slideshow">
+  <div class="slide slide-a"></div>
+  <div class="slide slide-b"></div>
+  <div class="intro-overlay"></div>
+  <!-- Your intro content goes here -->
+</section>
+
+<style>
+#intro {
+  background: #000;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  min-height: 720px;
+  display: table;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.intro-overlay {
+  position: absolute;
+  inset: 0;
+  background: #111111;
+  opacity: .70;
+  pointer-events: none;
+}
+
+#intro .slide {
+  position: absolute;
+  inset: 0;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: opacity 800ms ease;
+  opacity: 0;
+}
+
+#intro .slide.is-visible {
+  opacity: 1;
+}
+</style>
+
+<script>
+  // Change delay here (seconds)
+  const SLIDE_SECONDS = 2;
+
+  // Your 5 manual image URLs
+  const images = [
+    '/home/cpp/SUPER-NAS/USERS/Chirag/laptop-backup/CPP-personal/website/cpadubidri.github.io/cpadubidri.github.io/images/intro-bg.jpg',
+    '/home/cpp/SUPER-NAS/USERS/Chirag/laptop-backup/CPP-personal/website/cpadubidri.github.io/cpadubidri.github.io/images/bandaje-trek1.jpg',
+    '/home/cpp/SUPER-NAS/USERS/Chirag/laptop-backup/CPP-personal/website/cpadubidri.github.io/cpadubidri.github.io/images/bg.jpg',
+  ];
+
+  const intro = document.querySelector('#intro');
+  const a = intro.querySelector('.slide-a');
+  const b = intro.querySelector('.slide-b');
+
+  // Preload for smoothness
+  images.forEach(src => { const img = new Image(); img.src = src; });
+
+  let idx = 0;
+  let showingA = true;
+
+  function setBackground(el, url) {
+    el.style.backgroundImage = `url(${url})`;
+  }
+
+  function startSlideshow() {
+    setBackground(a, images[0]);
+    a.classList.add('is-visible');
+    if (images.length > 1) setBackground(b, images[1]);
+    idx = 1;
+
+    if (images.length > 1) {
+      setInterval(() => {
+        const nextUrl = images[idx % images.length];
+        if (showingA) {
+          setBackground(b, nextUrl);
+          b.classList.add('is-visible');
+          a.classList.remove('is-visible');
+        } else {
+          setBackground(a, nextUrl);
+          a.classList.add('is-visible');
+          b.classList.remove('is-visible');
+        }
+        showingA = !showingA;
+        idx++;
+      }, SLIDE_SECONDS * 1000);
+    }
+  }
+
+  startSlideshow();
+</script>
