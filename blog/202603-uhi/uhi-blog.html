@@ -67,6 +67,19 @@
             padding: 20px;
             color: #666;
         }
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 25px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -75,15 +88,15 @@
 
     <h1>My Journey: Cooling Urban Heat Islands with AI</h1>
 
-    <div class="image-container">
-        <img src="/blog/uhi/images/uhi-cover.jpg" alt="Urban Heat Island Illustration">
+    <div class="hero-image">
+    <img src="https://cpadubidri.github.io/blog/202603-uhi/images/uhi-cover.png" alt="Urban Heat Island Illustration">
     </div>
 
     <p>Hello all,</p>
 
     <p>This hackathon didn’t end with a top 20 finish for me, but it turned out to be one of the most rewarding learning experiences I’ve had in a while. Here’s how I approached the challenge and what I learned along the way.</p>
 
-    <p>When I first saw the problem—predicting Urban Heat Island (UHI) intensity—I didn’t treat it as just a machine learning task. I saw it as a geospatial problem. UHI isn’t isolated; it’s influenced by surroundings like buildings, vegetation, elevation, and materials.</p>
+    <p>When I first saw the problem predicting Urban Heat Island (UHI) intensity I didn’t treat it as just a machine learning task. I saw it as a geospatial problem. UHI isn’t isolated; it’s influenced by surroundings like buildings, vegetation, elevation, and materials.</p>
 
     <h2>The Data I Used</h2>
     <ul>
@@ -153,7 +166,7 @@
         <li>Faster training (GNNs are computationally expensive)</li>
     </ul>
 
-    <p>If I could redo this, I’d definitely collaborate. Doing everything solo—from data prep to modeling—was challenging. A team would have made this smoother (and more fun).</p>
+    <p>If I could redo this, I’d definitely collaborate. Doing everything solo—from data prep to modeling was challenging. A team would have made this smoother (and more fun).</p>
 
     <h2>Final Thoughts</h2>
 
