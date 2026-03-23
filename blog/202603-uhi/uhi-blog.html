@@ -80,6 +80,22 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 14px;
+            background-color: #131011;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: background 0.2s ease;
+        }
+
+        .back-button:hover {
+            background-color: #444;
+}
     </style>
 </head>
 <body>
@@ -91,6 +107,8 @@
     <div class="hero-image">
     <img src="https://cpadubidri.github.io/blog/202603-uhi/images/uhi-cover.png" alt="Urban Heat Island Illustration">
     </div>
+
+    <button onclick="history.back()" class="back-button">← Go Back</button>
 
     <p>Hello all,</p>
 
@@ -181,6 +199,8 @@
             EY-UHI-Hackthon-Code
         </a>
     </p>
+
+    <button onclick="history.back()" class="back-button">← Go Back</button>
 
     <div class="divider"></div>
 
